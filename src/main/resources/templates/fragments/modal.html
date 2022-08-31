@@ -1,0 +1,57 @@
+<th:block th:fragment="modal(id, header, content, footer)">
+  <div class="modal fade" th:id="${id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div th:insert="${header}" class="modal-header" style="background-color: #343a40;color:white">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div th:insert="${content}" class="modal-body">
+        </div>
+        <div th:insert="${footer}" class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>
+
+<th:block th:fragment="modalLg(id, header, content, footer)">
+  <div class="modal fade modal-torkos" th:id="${id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div th:insert="${header}" class="modal-header" style="background-color: #343a40;color:white">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="false">X</span>
+          </button>
+        </div>
+        <div th:insert="${content}" class="modal-body">
+        </div>
+        <div th:insert="${footer}" class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>
+
+<th:block th:fragment="modalSm(id, header, content, footer)">
+  <div class="modal fade" th:id="${id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div th:insert="${header}" class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div th:insert="${content}" class="modal-body">
+        </div>
+        <div th:insert="${footer}" class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>
+
