@@ -1,0 +1,3 @@
+hu\asami\annotations\DbTable.class
+hu\asami\annotations\NotDatabaseField.class
+hu\asami\dao\Dao.class

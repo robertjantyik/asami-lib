@@ -1,0 +1,38 @@
+
+t	java:S135Ò"YReduce the total number of break and continue statements in this loop to use at most one.(ü†Æóÿÿÿÿÿ
+Q
+java:S1141Ô"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+u
+java:S4144³"WUpdate this method so that its implementation is not identical to "delete" on line 256.(˜…Ü”8³Ë½ ¯0
+t
+java:S3776-"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(á“ª–ùÿÿÿÿ8¸Ë½ ¯0
+o
+java:S62048"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(µÚÛ‚8¾Ë½ ¯0
+I
+java:S1872S"'Use an "instanceof" comparison instead.(şıï…ıÿÿÿÿ8ÂË½ ¯0
+h
+java:S6201V"FReplace this instanceof check and cast with 'instanceof byte[] byte[]'(üúÂÌüÿÿÿÿ8ÄË½ ¯0
+p
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(ƒ›çŠ8ÈË½ ¯0
+p
+java:S6204‰"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(µÚÛ‚8ÌË½ ¯0
+J
+java:S1872 "'Use an "instanceof" comparison instead.(şıï…ıÿÿÿÿ8ĞË½ ¯0
+u
+java:S3776»"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(øå¾Ïùÿÿÿÿ8ÓË½ ¯0
+9
+java:S3626é"Remove this redundant jump.(ÉŠ©ƒ8ÕË½ ¯0
+p
+java:S6204Î"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(µÚÛ‚8ÙË½ ¯0
+B
+java:S1872Õ"Use "isAssignableFrom" instead.(í¤×Ëúÿÿÿÿ8ÛË½ ¯0
+B
+java:S1872İ"Use "isAssignableFrom" instead.(‹Ã—ùÿÿÿÿ8ÜË½ ¯0
+=
+java:S1872à"Use "isAssignableFrom" instead.(ºø“ú8ŞË½ ¯0
+I
+java:S1168ú"+Return an empty collection instead of null.(¥¹ï8áË½ ¯0
+^	java:S125“"<This block of commented-out lines of code should be removed.(™ç‡úÿÿÿÿ8äË½ ¯0
+Y
+java:S1117"6Rename "id" which hides the field declared at line 24.(¯¼Á¶ùÿÿÿÿ8åË½ ¯0
+^	java:S125«"<This block of commented-out lines of code should be removed.(™ç‡úÿÿÿÿ8èË½ ¯0
