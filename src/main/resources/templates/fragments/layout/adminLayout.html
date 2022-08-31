@@ -24,7 +24,29 @@
         .custom-file-input {
             opacity: 100!important;
         }
-    </style>
+        #loadingoverlay {
+            position: fixed;
+            top: 0;
+            z-index: 99999999;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: rgba(0,0,0,0.6);
+        }
+
+        .asami-cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .asami-spinner {
+            width: 40px;
+            height: 40px;
+            animation: sp-anime 1s infinite;
+        }
+        </style>
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse">
 <div class="wrapper">
@@ -163,4 +185,9 @@
 
 <div th:replace="${scripts}"></div>
 </body>
+<div id="loadingoverlay">
+    <div class="asami-cv-spinner">
+        <img class="asami-spinner" th:src="@{/img/asami_logo.png}"/>
+    </div>
+</div>
 </html>
