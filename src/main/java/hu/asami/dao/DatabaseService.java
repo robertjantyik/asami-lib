@@ -1,5 +1,7 @@
 package hu.asami.dao;
 
+import hu.asami.dao.exceptions.DaoMoreThenOneResultException;
+
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;

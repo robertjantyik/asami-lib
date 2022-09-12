@@ -1,4 +1,4 @@
-package hu.asami.dao;
+package hu.asami.dao.exceptions;
 
 public class DaoMoreThenOneResultException extends DaoException{
 

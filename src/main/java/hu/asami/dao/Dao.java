@@ -1,13 +1,10 @@
 package hu.asami.dao;
 
-import hu.asami.annotations.*;
+import hu.asami.dao.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.time.StopWatch;
-import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectReader;
 import org.postgresql.util.PGobject;
-import org.springframework.lang.Nullable;
 
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
@@ -16,10 +13,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 public class Dao<T extends DataTransferObject> {
@@ -48,8 +42,8 @@ public class Dao<T extends DataTransferObject> {
             c = dataSource.getConnection();
             c.setAutoCommit(false);
             this.type = type;
-            this.fields = Arrays.stream(type.getDeclaredFields()).filter(field -> field.getAnnotation(NotDatabaseField.class) == null).toList();
-            this.table = type.getAnnotation(DbTable.class).value();
+            this.fields = Arrays.stream(type.getDeclaredFields()).filter(field -> field.isAnnotationPresent(NotDatabaseField.class)).toList();
+            this.table = type.getDeclaredAnnotation(DbTable.class).value();
             this.id = "Dao<" + type.getName().substring(type.getName().lastIndexOf(".")).replaceAll("[.]", "") + ">";
             log.debug("Új DAO példány: " + id);
         } catch (SQLException e) {
@@ -179,7 +173,7 @@ public class Dao<T extends DataTransferObject> {
             checkConnection();
             int ret;
             Object typeId = null;
-            Optional<Field> idField = this.fields.stream().filter(f -> f.getAnnotation(hu.asami.annotations.Id.class) != null).findFirst();
+            Optional<Field> idField = this.fields.stream().filter(f -> f.isAnnotationPresent(Id.class)).findFirst();
             if(idField.isPresent()){
                 typeId = o.getClass().getDeclaredMethod("get" + idField.get().getName().substring(0, 1).toUpperCase() + idField.get().getName().substring(1)).invoke(o);
             }
@@ -247,7 +241,7 @@ public class Dao<T extends DataTransferObject> {
             String fieldName = field.getName();
             String fieldNameCamel = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
             Object fieldValue = o.getClass().getDeclaredMethod("get" + fieldNameCamel).invoke(o);
-            if (fieldValue == null && field.getAnnotation(Null.class) == null) {
+            if (fieldValue == null && field.isAnnotationPresent(Null.class)) {
                 continue;
             } else if (fieldNotEmpty) {
                 sqlBuilder.append(" (");
@@ -288,7 +282,7 @@ public class Dao<T extends DataTransferObject> {
     }
     private void processFields(ObjectMapper mapper, StringBuilder sql, Field field, Object fieldValue) throws SQLException, IOException {
         if (fieldValue instanceof List<?>) {
-            if(field.getAnnotation(Json.class) != null) {
+            if(field.isAnnotationPresent(Json.class)) {
                 sql.append(" ?");
                 PGobject fieldJsonValue = new PGobject();
                 fieldJsonValue.setType("json");
@@ -321,7 +315,7 @@ public class Dao<T extends DataTransferObject> {
                 String fieldNameCamel = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
                 Method setter = type.getDeclaredMethod("set" + fieldNameCamel, field.getType());
                 if(field.getType().isAssignableFrom(List.class)) {
-                    if (field.getAnnotation(Json.class) != null) {
+                    if (field.isAnnotationPresent(Json.class)) {
                         PGobject pGobject = (PGobject) rs.getObject(fieldName);
                         ObjectMapper mapper = new ObjectMapper();
                         Object fieldValue = mapper.readValue(pGobject.getValue(), field.getType());
