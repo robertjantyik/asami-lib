@@ -1,4 +1,4 @@
-package hu.asami.services;
+package hu.asami.services.email;
 
 import lombok.Data;
 import org.springframework.core.io.InputStreamSource;

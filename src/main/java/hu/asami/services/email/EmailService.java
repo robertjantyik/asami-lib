@@ -1,8 +1,6 @@
-package hu.asami.services;
+package hu.asami.services.email;
 
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -16,14 +14,15 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-@Service
 public class EmailService {
     //region Fields
-    @Autowired
     private JavaMailSender mailSender;
-
-    @Autowired
     private TemplateEngine templateEngine;
+
+    public EmailService(JavaMailSender mailSender, TemplateEngine templateEngine) {
+        this.mailSender = mailSender;
+        this.templateEngine = templateEngine;
+    }
 
     //endregion
     public void sendMail(final String toEmail, Locale locale, Map<String, Object> vars, List<EmailInlineImage> images, final String template, final String fromEmail, final String fromName, final String subject) throws MessagingException, UnsupportedEncodingException {
