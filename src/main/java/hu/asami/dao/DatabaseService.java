@@ -1,93 +1,93 @@
 package hu.asami.dao;
 
 import hu.asami.dao.exceptions.DaoMoreThenOneResultException;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * <p>Single bean service for one {@link Dao} instance.</p>
+ */
+@Slf4j
+@SuppressWarnings("unchecked")
 public class DatabaseService {
-
+    //region Fields
     private Dao dao;
     private final DataSource dataSource;
 
-    public DatabaseService(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
+    //endregion
+    //region Select
     public <T extends DataTransferObject> List<T> selectList(Class<T> type, String sql, Object[] params) throws SQLException {
         createDao(type);
-        return (List<T>) this.dao.select(sql, params);
+        return this.dao.select(sql, params);
     }
 
     public <T extends DataTransferObject> T selectRecord(Class<T> type, String sql, Object[] params) throws SQLException, DaoMoreThenOneResultException {
         createDao(type);
-        List<T> ret = (List<T>) this.dao.select(sql, params);
-        if(ret.size() == 1){
+        List<T> ret = this.dao.select(sql, params);
+        if (ret.size() == 1) {
             return ret.get(0);
         }
-        throw new DaoMoreThenOneResultException("More then one record returned from query.");
+        throw new DaoMoreThenOneResultException("More then one record returned from query." + this.dao.getSql());
     }
 
-    public <T extends DataTransferObject> Object insertRecord(Class<T> type, T o) throws SQLException {
+    //endregion
+    //region Insert
+    public <T extends DataTransferObject> Object insert(Class<T> type, T o) throws SQLException {
         createDao(type);
         return this.dao.insert(o);
     }
 
-    public <T extends DataTransferObject> boolean insertList(Class<T> type, List<T> list, boolean stopAtError) throws SQLException {
+    public <T extends DataTransferObject> boolean insertWithoutId(Class<T> type, T o) throws SQLException {
         createDao(type);
-        if(stopAtError){
-            return insertListStop(list);
-        } else {
-            return insertListNoStop(list);
-        }
-    }
-    private <T extends DataTransferObject> boolean insertListStop(List<T> list) throws SQLException {
-        boolean hiba = false;
-        for(T t : list){
-            if(this.dao.insert(t) == null){
-                hiba = true;
-            }
-        }
-        return hiba;
-    }
-    private <T extends DataTransferObject> boolean insertListNoStop(List<T> list){
-        try{
-            for(T t : list){
-                this.dao.insert(t);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return true;
+        return this.dao.insertWithoutId(o);
     }
 
-    private <T extends DataTransferObject> int delete(Class<T> type, String sql, Object[] params) throws SQLException {
+    public <T extends DataTransferObject> void insertList(Class<T> type, List<T> list, boolean stopOnError) throws SQLException {
+        createDao(type);
+        this.dao.insertList(list, stopOnError);
+    }
+
+    //endregion
+    //region Delete
+    public <T extends DataTransferObject> int delete(Class<T> type, String sql, Object[] params) throws SQLException {
         createDao(type);
         return this.dao.delete(sql, params);
     }
 
-    private <T extends DataTransferObject> int delete(Class<T> type, String sql) throws SQLException {
+    public <T extends DataTransferObject> int delete(Class<T> type, String sql) throws SQLException {
         createDao(type);
         return this.dao.delete(sql);
     }
 
-    private <T extends DataTransferObject> int delete(Class<T> type, T o) throws SQLException {
+    public <T extends DataTransferObject> boolean delete(Class<T> type, T o) throws SQLException {
         createDao(type);
         return this.dao.delete(o);
     }
 
-    private int nonQuery(String sql, Object[] params) throws SQLException {
+    //endregion
+    //region NonQuery
+    public ResultSet nonQuery(String sql, Object[] params) throws SQLException {
         return this.dao.nonQuery(sql, params);
     }
 
-    private int nonQuery(String sql) throws SQLException {
+    public ResultSet nonQuery(String sql) throws SQLException {
         return this.dao.nonQuery(sql);
     }
 
-    private <T extends DataTransferObject> void createDao(Class<T> type){
-        if(!this.dao.getType().isAssignableFrom(type)){
+    //endregion
+    //region Private
+    private <T extends DataTransferObject> void createDao(Class<T> type) {
+        if (!this.dao.getType().isAssignableFrom(type)) {
             this.dao = new Dao(type, this.dataSource);
         }
+    }
+
+    //endregion
+    public DatabaseService(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 }

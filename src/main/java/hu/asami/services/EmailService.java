@@ -18,12 +18,14 @@ import java.util.Map;
 
 @Service
 public class EmailService {
+    //region Fields
     @Autowired
     private JavaMailSender mailSender;
 
     @Autowired
     private TemplateEngine templateEngine;
 
+    //endregion
     public void sendMail(final String toEmail, Locale locale, Map<String, Object> vars, List<EmailInlineImage> images, final String template, final String fromEmail, final String fromName, final String subject) throws MessagingException, UnsupportedEncodingException {
         final Context ctx = new Context(locale);
         final MimeMessage mimeMessage = this.mailSender.createMimeMessage();
@@ -40,17 +42,10 @@ public class EmailService {
         message.setFrom(fromEmail, fromName);
         message.setTo(toEmail);
 
-        for(EmailInlineImage emailInlineImage : images){
+        for (EmailInlineImage emailInlineImage : images) {
             message.addInline(emailInlineImage.getName(), emailInlineImage.getData(), emailInlineImage.getType());
         }
 
         this.mailSender.send(mimeMessage);
-    }
-
-    @Data
-    public class EmailInlineImage {
-        private String name;
-        private String type;
-        private InputStreamSource data;
     }
 }

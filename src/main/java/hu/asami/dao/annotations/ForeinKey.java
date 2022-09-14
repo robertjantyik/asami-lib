@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ForeinKey {
-    Class<DataTransferObject> value();
+    Class<? extends DataTransferObject> value();
 }
