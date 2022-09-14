@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ASAMI | Log in </title>
+    <link th:href="@{/assets/img/asami_logo.png}" rel="icon">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+    <link rel="stylesheet" th:href="@{/assets/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/icheck-bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/OverlayScrollbars.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/adminlte.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-reboot.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap-grid.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/assets/jqwidgets/styles/jqx.base.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/assets/jqwidgets/styles/jqx.fresh.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/assets/css/toastr.min.css}" type="text/css"/>
+
+    <style>
+
+        #loadingoverlay {
+            position: fixed;
+            top: 0;
+            z-index: 99999999;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .asami-cv-spinner {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .asami-spinner {
+            width: 40px;
+            height: 40px;
+            animation: sp-anime 1s infinite;
+        }
+
+    </style>
+
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <img src="/assets/img/asami_logo.png" style="object-fit: cover;height:15vw"/>
+            <a href="#" class="h1"><b>ASAMI</b> Bejelentkezés</a>
+        </div>
+        <div class="card-body">
+            <p class="login-box-msg">A munkamenet megkezdéséhez jelentkezzen be!</p>
+
+            <form action="#" method="post">
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">
+                                Maradjon bejelentkezve
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Bejelentkezés</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            <!--      <div class="social-auth-links text-center mt-2 mb-3">
+                    <a href="#" class="btn btn-block btn-primary">
+                      <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                      <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
+                  </div>-->
+            <!-- /.social-auth-links -->
+
+            <p class="mb-1">
+                <a href="#">Elfelejtettem a jelszavam</a>
+            </p>
+            <p class="mb-0">
+                <a href="#" class="text-center">Regisztráció</a>
+            </p>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script type="text/javascript" th:src="@{/assets/js/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script type="text/javascript" th:src="@{/assets/js/bootstrap.bundle.js}"></script>
+<!-- AdminLTE App -->
+<script type="text/javascript" th:src="@{/assets/js/adminlte.min.js}"></script>
+</body>
+<div id="loadingoverlay">
+    <div class="asami-cv-spinner">
+        <img class="asami-spinner" th:src="@{/img/asami_logo.png}"/>
+    </div>
+</div>
+</html>
