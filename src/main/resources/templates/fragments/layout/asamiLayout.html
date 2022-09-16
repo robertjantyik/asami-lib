@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html th:fragment="asamiLayout(title, content-header,content, scripts)">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="asamiLayout(title,contentheader,content, scripts)">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,7 +80,7 @@
             <!-- Sidebar user (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <img th:src="@{/assets/img/asami_logo.png}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">User</a>
@@ -142,20 +142,18 @@
                     </li>
                     <li class="nav-header">ÉTTEREM</li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a th:href="@{/etlap}" class="nav-link">
                             <i class="nav-icon fas fa-utensils"></i>
                             <p>
                                 Étlap
-                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a th:href="@{/hetiajanlat}" class="nav-link">
                             <i class="nav-icon far fa-calendar-alt"></i>
                             <p>
                                 Heti ajánlat
-                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                     </li>
@@ -165,7 +163,6 @@
                             <i class="nav-icon fas fa-file-invoice"></i>
                             <p>
                                 Számlák
-                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                     </li>
@@ -174,7 +171,6 @@
                             <i class="nav-icon fas fa-chart-bar"></i>
                             <p>
                                 Kimutatások
-                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                     </li>
@@ -184,7 +180,6 @@
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Partnerek
-                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                     </li>
@@ -217,7 +212,6 @@
                             <i class="nav-icon fas fa-headset"></i>
                             <p>
                                 Ügyfélszolgálat
-                                <span class="badge badge-info right">2</span>
                             </p>
                         </a>
                     </li>
@@ -232,16 +226,24 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
+        <section class="contentheader">
             <div class="container-fluid">
-                <div th:replace="${content-header}"></div>
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 th:replace="${contentheader}"></h1>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <div th:replace="${content}"></div>
+                <div class="row">
+                    <div class="col">
+                        <div th:replace="${content}"></div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- /.content -->
@@ -275,14 +277,14 @@
 
 <script type="text/javascript" th:src="@{/assets/jqwidgets/globalization/globalize.js}"></script>
 <script type="text/javascript" th:src="@{/assets/jqwidgets/globalization/globalize.culture.hu-HU.js}"></script>
-<script type="text/javascript" th:src="@{/js/jqx-magyar-loc.js}"></script>
+<script type="text/javascript" th:src="@{/assets/jqwidgets/jqx-magyar-loc.js}"></script>
 
 
 <div th:replace="${scripts}"></div>
 </body>
 <div id="loadingoverlay">
     <div class="asami-cv-spinner">
-        <img class="asami-spinner" th:src="@{/img/asami_logo.png}"/>
+        <img class="asami-spinner" th:src="@{/assets/img/asami_logo.png}"/>
     </div>
 </div>
 </html>
