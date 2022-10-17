@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="asamiLayout(title,contentheader,content, scripts)">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="asamiLayout(title,content, scripts)">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -109,7 +109,7 @@
 
                     <li class="nav-header">CMS</li>
                     <li class="nav-item">
-                        <a th:href="@{/infobox}"class="nav-link">
+                        <a th:href="@{/informacio}"class="nav-link">
                             <i class="nav-icon fas fa-question"></i>
                             <p>
                                 InfoBox
@@ -177,7 +177,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="contentheader">
+<!--        <section class="contentheader">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
@@ -185,7 +185,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
         <!-- Main content -->
         <section class="content">
